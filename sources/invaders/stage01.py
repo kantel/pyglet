@@ -20,11 +20,12 @@ class GameWindow(pyglet.window.Window):
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
         
-        self.player = GameObject(50, 300, "player_ship.png")
+        self.player = GameObject(50, 300, "Spritesheet_64x29.png")
     
     def on_draw(self):
         self.clear()
         self.player.sprite.draw()
+        
         self.fps_display.draw()
     
     def update(self, dt):

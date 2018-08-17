@@ -28,7 +28,7 @@ class GameObject():
         self.sprite.draw()
     
     def update(self, dt):
-        self.sprite.x += self.velx*dt
-        self.sprite.y += self.vely*dt
-        self.posx = self.sprite.x
-        self.posy = self.sprite.y
+        self.posx += self.velx*dt
+        self.posy += self.vely*dt
+        self.sprite.x = self.posx
+        self.sprite.y = self.posy

@@ -1,7 +1,7 @@
 import pyglet
 from pyglet.window import FPSDisplay, key
 from pyglet.sprite import Sprite
-from gameobjects import GameObject, preload_image, preload_image_animation
+from gameobjects2 import GameObject, preload_image, preload_image_animation
 import os
 
 TITLE = "Space Invaders Stage 2"
@@ -40,7 +40,7 @@ class GameWindow(pyglet.window.Window):
         if symbol == key.DOWN:
             self.player.vely = -PLAYERSPEED
         if symbol == key.ESCAPE:
-            pyglet.app.exit().
+            pyglet.app.exit()
     
     def on_key_release(self, symbol, modifiers):
         if symbol in (key.UP, key.DOWN):

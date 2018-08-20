@@ -1,12 +1,14 @@
 import pyglet
 from pyglet.window import FPSDisplay, key
 from pyglet.sprite import Sprite
-from gameobjects2 import GameObject, preload_image, preload_image_animation
+from gameobjects2 import GameObject, Player, Ufo, Space, preload_image, preload_image_animation
 import os
 
 TITLE = "Space Invaders Stage 2"
 PLAYERSPEED = 300
 SPACESPEED = -50
+WIDTH = 900
+HEIGHT = 600
 
 class GameWindow(pyglet.window.Window):
     
@@ -23,16 +25,23 @@ class GameWindow(pyglet.window.Window):
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
         
+        # Hintergrund
         self.space_list = []
         self.space_img = preload_image("farback.gif")
         for i in range(2):
-            self.space_list.append(GameObject(i*1782, 0, Sprite(self.space_img)))
+            self.space_list.append(Space(i*1782, 0, Sprite(self.space_img)))
         
         for space in self.space_list:
             space.velx = SPACESPEED
         
+        # Gegner
+        self.ufo_list = []
+        self.ufo_img = preload_image_animation("eSpritesheet_40x30.png", 6, 1, 40, 30)
+        for i in range(10):
+            self.ufo_list.append(Ufo(840, 500 - i*40, Sprite(self.ufo_img)))
+        
         player_spr = Sprite(preload_image_animation("Spritesheet_64x29.png", 4, 1, 64, 29))
-        self.player = GameObject(50, 300, player_spr)
+        self.player = Player(50, 300, player_spr)
     
     def on_key_press(self, symbol, modifiers):
         if symbol == key.UP:
@@ -51,6 +60,8 @@ class GameWindow(pyglet.window.Window):
         for space in self.space_list:
             space.draw()
         self.player.draw()
+        for ufo in self.ufo_list:
+            ufo.draw()
         
         self.fps_display.draw()
     
@@ -62,8 +73,23 @@ class GameWindow(pyglet.window.Window):
                 self.space_list.append(GameObject(1682, 0, Sprite(self.space_img)))
             space.velx = SPACESPEED
     
+    def update_ufo(self, dt):
+        for ufo in self.ufo_list:
+            ufo.update(dt)
+            if ufo.posy <= 10:
+                ufo.posy = 10
+                ufo.posx -= 40
+                ufo.speed *= -1
+            if ufo.posy >= HEIGHT - 50:
+                ufo.posy = HEIGHT - 50
+                ufo.posx -= 40
+                ufo.speed *= -1
+            ufo.vely = ufo.speed
+                
+    
     def update(self, dt):
         self.player.update(dt)
+        self.update_ufo(dt)
         self.update_space(dt)
 
 win = GameWindow(900, 600, TITLE, resizable = False)

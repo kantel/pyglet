@@ -1,6 +1,9 @@
 import pyglet
 from pyglet.sprite import Sprite
 
+WIDTH = 900
+HEIGHT = 600
+
 def preload_image(image):
     img = pyglet.image.load("images/" + image)
     return img
@@ -32,3 +35,30 @@ class GameObject():
         self.posy += self.vely*dt
         self.sprite.x = self.posx
         self.sprite.y = self.posy
+
+class Player(GameObject):
+    
+    def __init__(self, posx, posy, sprite = None):
+        super().__init__(posx, posy, sprite)
+
+    def update(self, dt):
+        self.posx += self.velx*dt
+        self.posy += self.vely*dt
+        if self.posy >= HEIGHT - 40:
+            self.posy = HEIGHT - 40
+        if self.posy <= 10:
+            self.posy = 10
+        self.sprite.x = self.posx
+        self.sprite.y = self.posy
+
+class Ufo(GameObject):
+    
+    def __init__(self, posx, posy, sprite = None):
+        super().__init__(posx, posy, sprite)
+        self.speed = -100
+
+class Space(GameObject):
+    
+    def __init__(self, posx, posy, sprite = None):
+        super().__init__(posx, posy, sprite)
+    

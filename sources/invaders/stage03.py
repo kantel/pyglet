@@ -40,11 +40,13 @@ class GameWindow(pyglet.window.Window):
         self.ufo_img2 = preload_image_animation("eSpritesheet_40x30_hue1.png", 6, 1, 40, 30)
         self.ufo_img3 = preload_image_animation("eSpritesheet_40x30_hue4.png", 6, 1, 40, 30)
         self.ufo_img4 = preload_image_animation("eSpritesheet_40x30_hue2.png", 6, 1, 40, 30)
+        self.ufo_img5 = preload_image_animation("eSpritesheet_40x30_hue3.png", 6, 1, 40, 30)
         for i in range(10):
             self.ufo_list.append(Ufo(840, 500 - i*40, Sprite(self.ufo_img1)))
             self.ufo_list.append(Ufo(760, 500 - i*40, Sprite(self.ufo_img2)))
             self.ufo_list.append(Ufo(680, 500 - i*40, Sprite(self.ufo_img3)))
             self.ufo_list.append(Ufo(600, 500 - i*40, Sprite(self.ufo_img4)))
+            self.ufo_list.append(Ufo(520, 500 - i*40, Sprite(self.ufo_img5)))
         
         player_spr = Sprite(preload_image_animation("Spritesheet_64x29.png", 4, 1, 64, 29))
         self.player = Player(50, 300, player_spr)

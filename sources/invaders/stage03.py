@@ -4,7 +4,7 @@ from pyglet.sprite import Sprite
 from gameobjects2 import GameObject, Player, Ufo, Space, preload_image, preload_image_animation
 import os
 
-TITLE = "Space Invaders Stage 2"
+TITLE = "Space Invaders Stage 3"
 PLAYERSPEED = 300
 SPACESPEED = -50
 WIDTH = 900
